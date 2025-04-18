@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Habit Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe1f0, #e0c3fc);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #6a1b9a;
+    }
+
+    /* Banner Container */
+    .welcome-box {
+      text-align: center;
+      background: white;
+      padding: 80px 60px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+      animation: slideUp 0.6s ease-in-out;
+    }
+
+    /* Animation for the banner */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Title styling */
+    .welcome-box h1 {
+      font-size: 2.8rem;
+      color: #9c27b0;
+      margin-bottom: 10px;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Paragraph styling */
+    .welcome-box p {
+      font-size: 1.1rem;
+      color: #9c27b0;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    /* Button styling */
+    .btn {
+      margin-top: 15px;
+      display: inline-block;
+      background: #ba68c8;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    /* Hover effect for buttons */
+    .btn:hover {
+      background-color: #ab47bc;
+      transform: scale(1.05);
+      border-color: #9c27b0;
+    }
+
+    /* Focus effect for buttons */
+    .btn:focus {
+      outline: none;
+    }
+
+    /* Form popup styling */
+    .popup-form {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 300px;
+    }
+
+    .popup-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .popup-form button {
+      padding: 10px;
+      width: 100%;
+      background-color: #ba68c8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .popup-form button:hover {
+      background-color: #ab47bc;
+    }
+
+    /* Footer section */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #9c27b0;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: #8e24aa;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .welcome-box {
+        padding: 30px;
+      }
+      .welcome-box h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-box">
+    <h1>Welcome to Habit Tracker 🌸</h1>
+    <p>Track your goals in a fun, beautiful way.</p>
+
+    <!-- Notify Me Button -->
+    <button class="btn" onclick="openPopup()">🔔 Notify Me</button>
+
+    <!-- Go to Dashboard Button -->
+    <a href="/login" class="btn">Go to Dashboard</a>
+  </div>
+
+  <!-- Popup Form for Habit and Reminder -->
+  <div class="popup-form" id="popupForm">
+    <h3>Set Habit Reminder</h3>
+    <input type="text" id="habit" placeholder="Enter your habit" required>
+    <input type="time" id="reminderTime" required>
+    <button onclick="sendReminder()">Set Reminder</button>
+  </div>
+
+  <!-- Footer section with a register link -->
+  <div class="footer">
+    <p>Need an account? <a href="/register">Register here</a></p>
+  </div>
+
+  <script>
+    // Open the form popup
+    function openPopup() {
+      document.getElementById('popupForm').style.display = 'block';
+    }
+
+    // Send the reminder (for now just show an alert)
+    function sendReminder() {
+      const habit = document.getElementById('habit').value;
+      const reminderTime = document.getElementById('reminderTime').value;
+
+      if (habit && reminderTime) {
+        // Here, you would typically send the data to the backend and set up email reminders
+        alert(`Reminder set for habit: ${habit} at ${reminderTime}.`);
+
+        // Close the popup form
+        document.getElementById('popupForm').style.display = 'none';
+      } else {
+        alert('Please fill in both fields.');
+      }
+    }
+  </script>
+</body>
+</html>

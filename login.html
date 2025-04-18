@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(to right, #ffe1f0, #e0c3fc);
+    font-family: 'Poppins', sans-serif;
+    color: #6a1b9a;
+  }
+
+  .tracker-box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #9c27b0;
+  }
+
+  .form-label {
+    color: #6a1b9a;
+    font-weight: 500;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ce93d8;
+    padding: 10px;
+  }
+
+  .btn-custom {
+    background-color: #ba68c8;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+  }
+
+  .btn-custom:hover {
+    background-color: #ab47bc;
+  }
+
+  .alert {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  a {
+    color: #8e24aa;
+    font-weight: 500;
+  }
+</style>
+
+<div class="tracker-box">
+  <h2 class="text-center">Login</h2>
+  <form method="POST" autocomplete="off">
+    <!-- Hidden dummy fields to prevent autofill -->
+    <input type="text" name="fakeusernameremembered" style="display:none">
+    <input type="password" name="fakepasswordremembered" style="display:none">
+
+    {% if not show_otp %}
+    <!-- Email and password fields -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" id="email" placeholder="Email" required autocomplete="off">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="password" placeholder="Password" required autocomplete="new-password">
+    </div>
+    {% endif %}
+
+    {% if show_otp %}
+    <!-- OTP field shown after email/password verified -->
+    <div class="mb-3">
+      <label for="otp" class="form-label">OTP</label>
+      <input type="text" name="otp" class="form-control" id="otp" placeholder="Enter OTP" required>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success text-center">{{ success }}</div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-custom w-100">
+      {% if show_otp %}Verify OTP{% else %}Login{% endif %}
+    </button>
+
+    <p class="mt-3 text-center">Don't have an account? <a href="/register">Register here</a></p>
+  </form>
+</div>
+{% endblock %}
